@@ -1,0 +1,146 @@
+#:import Factory kivy.factory.Factory
+Windows:
+    FirstWindow:
+    SecondWindow:
+    ThirdWindow:
+
+<FirstWindow>
+    name: 'first'
+    MDBoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        MDNavigationLayout:
+            ScreenManager:
+                id: screen_mng
+                Screen:
+                    name: 'main Screen'
+                    BoxLayout:
+                        orientation: 'vertical'
+                        MDTopAppBar:
+                            title: 'Dashboard'
+                            md_bg_color: app.theme_cls.accent_color
+                            specific_text_color: .2, 0, .7, .8
+                            left_action_items: [['menu',lambda x: navbar.set_state('open')]]
+                            right_action_items: [[ 'dots-vertical',lambda x: app.callback_1()], [ 'chevron-down', lambda x: app.callback_2()],[ 'instagram', lambda x: app.callback_3()]]
+                        MDFloatLayout:
+                            MDFillRoundFlatIconButton:
+                                text: 'Open calendar'
+                                pos_hint: {'center_x': 0.5,'center_y': .8}
+                                icon: 'calendar'
+                                md_bg_color: 1,0,1,1
+                                on_release: app.show_date()
+
+                            MDFillRoundFlatIconButton:
+                                text: 'Open time'
+                                pos_hint: {'center_x': 0.5,'center_y': .5}
+                                icon: 'clock'
+                                md_bg_color: 1,0,1,1
+                                on_release: app.show_time()
+
+                            MDLabel:
+                                id: date
+                                text: 'Chosen Date'
+                                pos_hint: {'center_x': 0.95,'center_y': 0.25}
+
+                        MDScreen:
+
+                            MDFloatingActionButtonSpeedDial:
+                                data: app.data
+                                rotation_root_button: True
+    Button:
+        text: 'Next Page'
+        font_size: 32
+        on_release:
+            app.root.current = 'Next'
+            root.manager.transition.direction = 'right'
+
+
+<SecondWindow>
+    name: 'Next'
+
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+
+        Label:
+            id: click_label
+            text: "Next Screen"
+            font_size: 40
+
+        Button:
+            text: 'Previous Page'
+            font_size: 32
+            on_release:
+                app.root.current = 'first'
+                root.manager.transition.direction = 'left'
+<MyTabs>
+    do_default_tab: False
+
+    TabbedPanelItem:
+        text: 'First Tab'
+        MDScreen:
+
+            ScreenManager:
+            #id: screen_mng
+            Screen:
+                #name: 'main Screen'
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDTopAppBar:
+                        title: 'Dashboard'
+                        md_bg_color: app.theme_cls.accent_color
+                        specific_text_color: .2, 0, .7, .8
+                        left_action_items: [['menu',lambda x: navbar.set_state('open')]]
+                        right_action_items: [[ 'dots-vertical',lambda x: app.callback_1()], [ 'chevron-down', lambda x: app.callback_2()],[ 'instagram', lambda x: app.callback_3()]]
+                    MDFloatLayout:
+                        MDFillRoundFlatIconButton:
+                            text: 'Open calendar'
+                            pos_hint: {'center_x': 0.5,'center_y': .8}
+                            icon: 'calendar'
+                            md_bg_color: 1,0,1,1
+                            on_release: app.show_date()
+
+                        MDFillRoundFlatIconButton:
+                            text: 'Open time'
+                            pos_hint: {'center_x': 0.5,'center_y': .5}
+                            icon: 'clock'
+                            md_bg_color: 1,0,1,1
+                            on_release: app.show_time()
+
+                        MDLabel:
+                            id: date
+                            text: 'Chosen Date'
+                            pos_hint: {'center_x': 0.95,'center_y': 0.25}
+
+                    MDScreen:
+
+                        MDFloatingActionButtonSpeedDial:
+                            data: app.data
+                            rotation_root_button: True
+
+
+                    MDBottomNavigation:
+                        panel_color: .3, 200/255, 30/255,1
+                        MDBottomNavigationItem:
+                            name: 'screen1'
+                            text: 'javascript'
+                            icon: 'language-javascript'
+                            MDLabel:
+                                text: 'Learn Javascript'
+                                halign: 'center'
+
+                        MDBottomNavigationItem:
+                            name: 'screen2'
+                            text: 'facebook1'
+                            icon: 'facebook'
+                            MDLabel:
+                                text: 'Login To Facebook'
+                                halign: 'center'
+
+                        MDBottomNavigationItem:
+                            name: 'screen3'
+                            text: 'TWitter '
+                            icon: 'Twitter'
+                            MDLabel:
+                                text: 'Share Your tweets'
+                                halign: 'center'
